@@ -1,0 +1,385 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Deep Research - Your Gateway to In-Depth Knowledge</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <script>
+        // Set theme on page load to prevent FOUC (Flash of Unstyled Content)
+        if (localStorage.getItem('color-theme') === 'dark' || (!('color-theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+            document.documentElement.classList.add('dark');
+        } else {
+            document.documentElement.classList.remove('dark');
+        }
+    </script>
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+        .hero-section {
+            background: linear-gradient(rgba(17, 24, 39, 0.8), rgba(17, 24, 39, 0.8)), url('https://placehold.co/1920x1080/2d3748/ffffff?text=Abstract+Knowledge');
+            background-size: cover;
+            background-position: center;
+        }
+        .glass-effect {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+        .dark .glass-effect {
+             background: rgba(31, 41, 55, 0.3); /* gray-800 with opacity */
+             border: 1px solid rgba(75, 85, 99, 0.5); /* gray-600 with opacity */
+        }
+        .section-title {
+            border-left: 4px solid #3b82f6; /* Blue-500 */
+            padding-left: 1rem;
+        }
+        .faq-item .faq-answer {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.5s ease-in-out;
+        }
+        .faq-item.open .faq-answer {
+            max-height: 500px; /* Adjust as needed */
+        }
+        .faq-item.open .faq-icon {
+            transform: rotate(45deg);
+        }
+    </style>
+</head>
+<body class="bg-gray-100 dark:bg-gray-950 text-gray-800 dark:text-gray-200 transition-colors duration-300">
+
+    <!-- Header -->
+    <header class="bg-white/80 dark:bg-gray-900/80 backdrop-blur-md shadow-sm dark:shadow-gray-800 sticky top-0 z-50">
+        <nav class="container mx-auto px-6 py-4 flex justify-between items-center">
+            <a href="#" class="text-2xl font-bold text-gray-900 dark:text-white">
+                <i class="fas fa-brain text-blue-600"></i> Deep Research
+            </a>
+            <div class="hidden md:flex items-center space-x-8">
+                <a href="#services" class="text-gray-600 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400 transition duration-300">Services</a>
+                <a href="#featured" class="text-gray-600 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400 transition duration-300">Featured</a>
+                <a href="#testimonials" class="text-gray-600 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400 transition duration-300">Testimonials</a>
+                <a href="#faq" class="text-gray-600 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400 transition duration-300">FAQ</a>
+            </div>
+            <div class="flex items-center gap-4">
+                 <a href="#cta" class="hidden md:inline-block bg-blue-600 text-white font-semibold px-6 py-2 rounded-lg hover:bg-blue-700 transition duration-300 transform hover:scale-105">
+                    Subscribe
+                </a>
+                <button id="theme-toggle" type="button" class="text-gray-500 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-700 focus:outline-none focus:ring-4 focus:ring-gray-200 dark:focus:ring-gray-700 rounded-lg text-sm p-2.5">
+                    <svg id="theme-toggle-dark-icon" class="hidden w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586 10.586z"></path></svg>
+                    <svg id="theme-toggle-light-icon" class="hidden w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path d="M10 2a1 1 0 011 1v1a1 1 0 11-2 0V3a1 1 0 011-1zm4 8a4 4 0 11-8 0 4 4 0 018 0zm-.464 4.95l.707.707a1 1 0 001.414-1.414l-.707-.707a1 1 0 00-1.414 1.414zm2.12-10.607a1 1 0 010 1.414l-.706.707a1 1 0 11-1.414-1.414l.707-.707a1 1 0 011.414 0zM17 11a1 1 0 100-2h-1a1 1 0 100 2h1zm-7 4a1 1 0 011 1v1a1 1 0 11-2 0v-1a1 1 0 011-1zM5.05 6.464A1 1 0 106.465 5.05l-.708-.707a1 1 0 00-1.414 1.414l.707.707zm1.414 8.486l-.707.707a1 1 0 01-1.414-1.414l.707-.707a1 1 0 011.414 1.414zM4 11a1 1 0 100-2H3a1 1 0 000 2h1z" fill-rule="evenodd" clip-rule="evenodd"></path></svg>
+                </button>
+                <button id="mobile-menu-button" class="md:hidden text-gray-800 dark:text-gray-300 focus:outline-none">
+                    <i class="fas fa-bars text-2xl"></i>
+                </button>
+            </div>
+        </nav>
+        <!-- Mobile Menu -->
+        <div id="mobile-menu" class="hidden md:hidden px-6 pb-4 bg-white dark:bg-gray-800">
+            <a href="#services" class="block py-2 text-gray-600 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400">Services</a>
+            <a href="#featured" class="block py-2 text-gray-600 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400">Featured</a>
+            <a href="#testimonials" class="block py-2 text-gray-600 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400">Testimonials</a>
+            <a href="#faq" class="block py-2 text-gray-600 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400">FAQ</a>
+            <a href="#cta" class="block mt-4 bg-blue-600 text-white text-center font-semibold px-6 py-2 rounded-lg hover:bg-blue-700">Subscribe</a>
+        </div>
+    </header>
+
+    <main>
+        <!-- Hero Section -->
+        <section class="hero-section text-white py-20 md:py-32">
+            <div class="container mx-auto px-6 text-center">
+                <h1 class="text-4xl md:text-6xl font-extrabold leading-tight mb-4">Uncover the World's Depths</h1>
+                <p class="text-lg md:text-xl text-gray-300 max-w-3xl mx-auto mb-8">
+                    Dive into meticulously researched reports, fascinating documentaries, and a universe of general knowledge. Your journey to true understanding starts here.
+                </p>
+                <a href="https://sites.google.com/view/deep-research-/home?authuser=0" target="_blank" rel="noopener noreferrer" class="bg-white text-blue-600 font-bold px-8 py-4 rounded-full text-lg hover:bg-gray-200 transition duration-300 transform hover:scale-105">
+                    Explore Our Content
+                </a>
+            </div>
+        </section>
+
+        <!-- What We Offer Section -->
+        <section id="services" class="py-20 bg-white dark:bg-gray-900">
+            <div class="container mx-auto px-6">
+                <div class="text-center mb-12">
+                    <h2 class="text-3xl md:text-4xl font-bold section-title inline-block dark:text-white">Our Content Pillars</h2>
+                    <p class="text-gray-600 dark:text-gray-400 mt-4 max-w-2xl mx-auto">We deliver knowledge across various formats, each crafted with precision and a commitment to quality.</p>
+                </div>
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+                    <!-- Service Card 1 -->
+                    <div class="bg-gray-50 dark:bg-gray-800 p-8 rounded-xl shadow-md hover:shadow-xl dark:hover:shadow-blue-500/20 hover:-translate-y-2 transition-all duration-300">
+                        <div class="text-blue-600 mb-4"><i class="fas fa-file-alt text-4xl"></i></div>
+                        <h3 class="text-xl font-bold mb-2 dark:text-white">Detailed Reports</h3>
+                        <p class="text-gray-600 dark:text-gray-400">In-depth analysis and comprehensive reports on complex subjects, from technology to geopolitics.</p>
+                    </div>
+                    <!-- Service Card 2 -->
+                    <div class="bg-gray-50 dark:bg-gray-800 p-8 rounded-xl shadow-md hover:shadow-xl dark:hover:shadow-blue-500/20 hover:-translate-y-2 transition-all duration-300">
+                        <div class="text-blue-600 mb-4"><i class="fas fa-globe-americas text-4xl"></i></div>
+                        <h3 class="text-xl font-bold mb-2 dark:text-white">General Knowledge</h3>
+                        <p class="text-gray-600 dark:text-gray-400">A vast repository of facts, figures, and fascinating information to satisfy your curiosity.</p>
+                    </div>
+                    <!-- Service Card 3 -->
+                    <div class="bg-gray-50 dark:bg-gray-800 p-8 rounded-xl shadow-md hover:shadow-xl dark:hover:shadow-blue-500/20 hover:-translate-y-2 transition-all duration-300">
+                        <div class="text-blue-600 mb-4"><i class="fas fa-film text-4xl"></i></div>
+                        <h3 class="text-xl font-bold mb-2 dark:text-white">Documentaries</h3>
+                        <p class="text-gray-600 dark:text-gray-400">Visually compelling and narrative-driven documentaries that bring stories and data to life.</p>
+                    </div>
+                    <!-- Service Card 4 -->
+                    <div class="bg-gray-50 dark:bg-gray-800 p-8 rounded-xl shadow-md hover:shadow-xl dark:hover:shadow-blue-500/20 hover:-translate-y-2 transition-all duration-300">
+                        <div class="text-blue-600 mb-4"><i class="fas fa-search-plus text-4xl"></i></div>
+                        <h3 class="text-xl font-bold mb-2 dark:text-white">Deep Research</h3>
+                        <p class="text-gray-600 dark:text-gray-400">Access original research papers and scholarly articles for academic and professional insights.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Featured Content Section -->
+        <section id="featured" class="py-20">
+            <div class="container mx-auto px-6">
+                <div class="text-center mb-12">
+                    <h2 class="text-3xl md:text-4xl font-bold section-title inline-block dark:text-white">Featured Insights</h2>
+                    <p class="text-gray-600 dark:text-gray-400 mt-4 max-w-2xl mx-auto">A glimpse into our most popular and recently published content.</p>
+                </div>
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                    <!-- Featured Card 1 -->
+                    <div class="bg-white dark:bg-gray-800 rounded-lg shadow-lg overflow-hidden transform hover:scale-105 transition-transform duration-300">
+                        <img src="https://placehold.co/600x400/3b82f6/ffffff?text=AI+Revolution" alt="AI Report" class="w-full h-48 object-cover">
+                        <div class="p-6">
+                            <span class="text-sm text-blue-600 dark:text-blue-400 font-semibold">REPORT</span>
+                            <h3 class="text-xl font-bold my-2 dark:text-white">The AI Revolution: Reshaping Industries</h3>
+                            <p class="text-gray-600 dark:text-gray-400 text-sm mb-4">An exhaustive look at how artificial intelligence is transforming healthcare, finance, and more.</p>
+                            <a href="#" class="text-blue-600 dark:text-blue-400 font-semibold hover:underline">Read More &rarr;</a>
+                        </div>
+                    </div>
+                    <!-- Featured Card 2 -->
+                    <div class="bg-white dark:bg-gray-800 rounded-lg shadow-lg overflow-hidden transform hover:scale-105 transition-transform duration-300">
+                        <img src="https://placehold.co/600x400/10b981/ffffff?text=Ancient+Civilizations" alt="Documentary" class="w-full h-48 object-cover">
+                        <div class="p-6">
+                            <span class="text-sm text-emerald-600 dark:text-emerald-400 font-semibold">DOCUMENTARY</span>
+                            <h3 class="text-xl font-bold my-2 dark:text-white">Echoes of the Ancients</h3>
+                            <p class="text-gray-600 dark:text-gray-400 text-sm mb-4">A visual journey exploring the rise and fall of the world's most enigmatic civilizations.</p>
+                            <a href="#" class="text-emerald-600 dark:text-emerald-400 font-semibold hover:underline">Watch Now &rarr;</a>
+                        </div>
+                    </div>
+                    <!-- Featured Card 3 -->
+                    <div class="bg-white dark:bg-gray-800 rounded-lg shadow-lg overflow-hidden transform hover:scale-105 transition-transform duration-300">
+                        <img src="https://placehold.co/600x400/8b5cf6/ffffff?text=Quantum+Physics" alt="Research Paper" class="w-full h-48 object-cover">
+                        <div class="p-6">
+                            <span class="text-sm text-violet-600 dark:text-violet-400 font-semibold">DEEP RESEARCH</span>
+                            <h3 class="text-xl font-bold my-2 dark:text-white">Quantum Entanglement: A New Paradigm</h3>
+                            <p class="text-gray-600 dark:text-gray-400 text-sm mb-4">Exploring the non-local connections that challenge our understanding of reality.</p>
+                            <a href="#" class="text-violet-600 dark:text-violet-400 font-semibold hover:underline">Access Paper &rarr;</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Testimonials Section -->
+        <section id="testimonials" class="py-20 bg-white dark:bg-gray-900">
+            <div class="container mx-auto px-6">
+                <div class="text-center mb-12">
+                    <h2 class="text-3xl md:text-4xl font-bold section-title inline-block dark:text-white">What Our Users Say</h2>
+                    <p class="text-gray-600 dark:text-gray-400 mt-4 max-w-2xl mx-auto">We are proud to be a trusted source of knowledge for researchers, students, and curious minds.</p>
+                </div>
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                    <!-- Testimonial 1 -->
+                    <div class="p-8 rounded-xl glass-effect">
+                        <p class="text-gray-700 dark:text-gray-300 mb-4">"The depth of the reports is unmatched. It's my go-to resource for any serious research project."</p>
+                        <div class="flex items-center">
+                            <img src="https://placehold.co/40x40/e2e8f0/334155?text=A" class="w-10 h-10 rounded-full mr-4" alt="User Avatar">
+                            <div>
+                                <p class="font-bold dark:text-white">Dr. Alisha Vance</p>
+                                <p class="text-sm text-gray-600 dark:text-gray-400">University Professor</p>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Testimonial 2 -->
+                    <div class="p-8 rounded-xl glass-effect">
+                        <p class="text-gray-700 dark:text-gray-300 mb-4">"I love the documentaries. They are not only informative but also beautifully produced. I've learned so much."</p>
+                        <div class="flex items-center">
+                            <img src="https://placehold.co/40x40/e2e8f0/334155?text=M" class="w-10 h-10 rounded-full mr-4" alt="User Avatar">
+                            <div>
+                                <p class="font-bold dark:text-white">Mark Chen</p>
+                                <p class="text-sm text-gray-600 dark:text-gray-400">Lifelong Learner</p>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Testimonial 3 -->
+                    <div class="p-8 rounded-xl glass-effect">
+                        <p class="text-gray-700 dark:text-gray-300 mb-4">"A fantastic platform that consolidates credible information. It saves me hours of searching online."</p>
+                        <div class="flex items-center">
+                            <img src="https://placehold.co/40x40/e2e8f0/334155?text=S" class="w-10 h-10 rounded-full mr-4" alt="User Avatar">
+                            <div>
+                                <p class="font-bold dark:text-white">Sarah Jenkins</p>
+                                <p class="text-sm text-gray-600 dark:text-gray-400">Journalist</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- FAQ Section -->
+        <section id="faq" class="py-20">
+            <div class="container mx-auto px-6">
+                <div class="text-center mb-12">
+                    <h2 class="text-3xl md:text-4xl font-bold section-title inline-block dark:text-white">Frequently Asked Questions</h2>
+                    <p class="text-gray-600 dark:text-gray-400 mt-4 max-w-2xl mx-auto">Have questions? We've got answers. If you can't find what you're looking for, feel free to contact us.</p>
+                </div>
+                <div class="max-w-3xl mx-auto">
+                    <div class="faq-item bg-white dark:bg-gray-800 rounded-lg shadow-md mb-4">
+                        <div class="faq-question p-6 cursor-pointer flex justify-between items-center">
+                            <h4 class="text-lg font-semibold dark:text-white">How often is new content added?</h4>
+                            <i class="fas fa-plus faq-icon text-blue-600 dark:text-blue-400 transition-transform duration-300"></i>
+                        </div>
+                        <div class="faq-answer px-6 pb-4 text-gray-600 dark:text-gray-400">
+                            <p>We are constantly working to expand our library. New reports, documentaries, and articles are added on a weekly basis across all our categories. Subscribers are notified of major content releases.</p>
+                        </div>
+                    </div>
+                    <div class="faq-item bg-white dark:bg-gray-800 rounded-lg shadow-md mb-4">
+                        <div class="faq-question p-6 cursor-pointer flex justify-between items-center">
+                            <h4 class="text-lg font-semibold dark:text-white">Is there a subscription fee?</h4>
+                            <i class="fas fa-plus faq-icon text-blue-600 dark:text-blue-400 transition-transform duration-300"></i>
+                        </div>
+                        <div class="faq-answer px-6 pb-4 text-gray-600 dark:text-gray-400">
+                            <p>Some of our content, like general knowledge articles, is available for free. However, for full access to our premium reports, documentaries, and deep research papers, we offer flexible subscription plans. You can find more details on our pricing page.</p>
+                        </div>
+                    </div>
+                    <div class="faq-item bg-white dark:bg-gray-800 rounded-lg shadow-md mb-4">
+                        <div class="faq-question p-6 cursor-pointer flex justify-between items-center">
+                            <h4 class="text-lg font-semibold dark:text-white">Can I contribute to Deep Research?</h4>
+                            <i class="fas fa-plus faq-icon text-blue-600 dark:text-blue-400 transition-transform duration-300"></i>
+                        </div>
+                        <div class="faq-answer px-6 pb-4 text-gray-600 dark:text-gray-400">
+                            <p>We collaborate with researchers, writers, and filmmakers who share our passion for quality content. If you are interested in contributing, please visit our 'Submissions' page for guidelines and contact information.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- CTA Section -->
+        <section id="cta" class="bg-blue-700 dark:bg-blue-800 text-white">
+            <div class="container mx-auto px-6 py-16 text-center">
+                <h2 class="text-3xl font-bold mb-4">Ready to Start Your Journey?</h2>
+                <p class="max-w-2xl mx-auto mb-8">Subscribe to our newsletter for the latest content updates, featured insights, and exclusive offers delivered right to your inbox.</p>
+                <form class="max-w-lg mx-auto flex flex-col sm:flex-row gap-4">
+                    <input type="email" placeholder="Enter your email address" class="w-full px-4 py-3 rounded-lg text-gray-800 focus:outline-none focus:ring-2 focus:ring-blue-300 dark:focus:ring-blue-500" required>
+                    <button type="submit" class="bg-white text-blue-600 font-bold px-8 py-3 rounded-lg hover:bg-gray-200 transition duration-300 shrink-0">Subscribe Now</button>
+                </form>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-gray-900 dark:bg-black text-gray-400">
+        <div class="container mx-auto px-6 py-12">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+                <div>
+                    <h3 class="text-lg font-bold text-white mb-4">Deep Research</h3>
+                    <p class="text-sm">Your trusted source for deep knowledge and verified information.</p>
+                </div>
+                <div>
+                    <h4 class="font-semibold text-white mb-4">Quick Links</h4>
+                    <ul>
+                        <li class="mb-2"><a href="#" class="hover:text-white dark:hover:text-blue-400">About Us</a></li>
+                        <li class="mb-2"><a href="#" class="hover:text-white dark:hover:text-blue-400">Contact</a></li>
+                        <li class="mb-2"><a href="#" class="hover:text-white dark:hover:text-blue-400">Careers</a></li>
+                        <li class="mb-2"><a href="#" class="hover:text-white dark:hover:text-blue-400">Submissions</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="font-semibold text-white mb-4">Legal</h4>
+                    <ul>
+                        <li class="mb-2"><a href="#" class="hover:text-white dark:hover:text-blue-400">Privacy Policy</a></li>
+                        <li class="mb-2"><a href="#" class="hover:text-white dark:hover:text-blue-400">Terms of Service</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="font-semibold text-white mb-4">Follow Us</h4>
+                    <div class="flex space-x-4">
+                        <a href="#" class="text-gray-400 hover:text-white text-xl"><i class="fab fa-twitter"></i></a>
+                        <a href="#" class="text-gray-400 hover:text-white text-xl"><i class="fab fa-linkedin-in"></i></a>
+                        <a href="#" class="text-gray-400 hover:text-white text-xl"><i class="fab fa-youtube"></i></a>
+                    </div>
+                </div>
+            </div>
+            <div class="border-t border-gray-800 dark:border-gray-700 mt-8 pt-6 text-center text-sm">
+                <p>&copy; <span id="year"></span> Deep Research. All Rights Reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Mobile Menu Toggle
+        const mobileMenuButton = document.getElementById('mobile-menu-button');
+        const mobileMenu = document.getElementById('mobile-menu');
+        mobileMenuButton.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+        });
+
+        // FAQ Accordion
+        const faqItems = document.querySelectorAll('.faq-item');
+        faqItems.forEach(item => {
+            const question = item.querySelector('.faq-question');
+            question.addEventListener('click', () => {
+                const isOpen = item.classList.contains('open');
+                // Close all items
+                faqItems.forEach(otherItem => {
+                    otherItem.classList.remove('open');
+                });
+                // If the clicked item was not open, open it
+                if (!isOpen) {
+                    item.classList.add('open');
+                }
+            });
+        });
+
+        // Set current year in footer
+        document.getElementById('year').textContent = new Date().getFullYear();
+
+        // Theme Toggle Logic
+        const themeToggleButton = document.getElementById('theme-toggle');
+        const themeToggleDarkIcon = document.getElementById('theme-toggle-dark-icon');
+        const themeToggleLightIcon = document.getElementById('theme-toggle-light-icon');
+        
+        // Set initial icon state
+        if (document.documentElement.classList.contains('dark')) {
+            themeToggleLightIcon.classList.remove('hidden');
+        } else {
+            themeToggleDarkIcon.classList.remove('hidden');
+        }
+
+        themeToggleButton.addEventListener('click', function() {
+            // Toggle icons
+            themeToggleDarkIcon.classList.toggle('hidden');
+            themeToggleLightIcon.classList.toggle('hidden');
+
+            // Toggle theme class
+            if (localStorage.getItem('color-theme')) {
+                if (localStorage.getItem('color-theme') === 'light') {
+                    document.documentElement.classList.add('dark');
+                    localStorage.setItem('color-theme', 'dark');
+                } else {
+                    document.documentElement.classList.remove('dark');
+                    localStorage.setItem('color-theme', 'light');
+                }
+            } else {
+                if (document.documentElement.classList.contains('dark')) {
+                    document.documentElement.classList.remove('dark');
+                    localStorage.setItem('color-theme', 'light');
+                } else {
+                    document.documentElement.classList.add('dark');
+                    localStorage.setItem('color-theme', 'dark');
+                }
+            }
+        });
+    </script>
+
+</body>
+</html>
